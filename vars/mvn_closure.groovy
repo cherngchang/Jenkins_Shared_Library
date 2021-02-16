@@ -27,15 +27,15 @@ def call(body) {
             tty: true
 	    volumeMounts:
 	    - name: vol
-	      mountPath: /build
-	  - name: git
+	      mountPath: "/build"
+	  - name: gitter
 	    image: alpine/git
 	    command:
 	    - cat
 	    tty: true
 	    volumeMounts:
             - name: vol
-              mountPath: /build
+              mountPath: "/build"
 	  volumes:
 	  - name: vol
 	    emptyDir: {}
@@ -46,7 +46,7 @@ def call(body) {
     stages {
       stage ('Check out Repo') {
         steps {
-          container('git') {
+          container('gitter') {
 	    dir ("/build") {
               script {
                 git url: "${pipelineParams.git_url}"
