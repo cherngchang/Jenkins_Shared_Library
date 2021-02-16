@@ -31,7 +31,7 @@ def call(body) {
 	  - name: git
 	    image: alpine/git
 	    command:
-	    -cat
+	    - cat
 	    tty: true
 	    volumeMounts:
             - name: vol
