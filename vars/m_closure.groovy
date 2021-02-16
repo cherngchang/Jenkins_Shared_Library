@@ -11,7 +11,7 @@ def call(body) {
     agent {
       kubernetes {
         cloud "${pipelineParams.my_cloud}"
-	label "Test-${pipelineParams.my_cloud}"
+	//label "Test-${pipelineParams.my_cloud}"
 	yaml """\
         apiVersion: v1
         kind: Pod
