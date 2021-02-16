@@ -25,11 +25,6 @@ def call(body) {
             command:
             - cat
             tty: true
-          - name: busybox
-            image: busybox
-            command:
-            - cat
-            tty: true
         """.stripIndent()
       }
     }
