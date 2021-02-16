@@ -36,7 +36,7 @@ def call(body) {
             sh "mkdir mvn-build"
 	    dir ("mvn-build") {
               script {
-                git url: ${pipelineParams.git_url}
+                git url: "${pipelineParams.git_url}"
 	      }
 	    }
 	  }
