@@ -5,7 +5,7 @@ def call(body) {
   body.delegate = pipelineParams
   body()
 
-  def LOG_LEVEL = '0'
+  //def LOG_LEVEL = '0'
 
   pipeline {
     agent {
