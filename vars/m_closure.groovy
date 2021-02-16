@@ -20,23 +20,10 @@ def call(body) {
             some-label: some-label-value
         spec:
           containers:
-	  - name: gitter
-	    image: alpine/git
-	    command:
-	    - cat
-	    volumeMounts:
-            - name: vol
-              mountPath: "/build"
           - name: maven
-            image: maven:alpine
+            image: changking/maven
             command:
             - cat
-	    volumeMounts:
-	    - name: vol
-	      mountPath: "/build"
-	  volumes:
-	  - name: vol
-	    emptyDir: {}
         """.stripIndent()
       }
     }
@@ -44,7 +31,8 @@ def call(body) {
     stages {
       stage ('Check out Repo') {
         steps {
-          container('gitter') {
+          container('maven') {
+	    sh "mkdir /build"
 	    dir ("/build") {
               script {
                 git url: "${pipelineParams.git_url}"
