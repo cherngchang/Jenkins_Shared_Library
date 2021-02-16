@@ -29,24 +29,10 @@ def call(body) {
     }
     
     stages {
-      stage ('Check out Repo') {
-        steps {
-          container('maven') {
-	    sh "mkdir /build"
-	    dir ("/build") {
-              script {
-                git url: "${pipelineParams.git_url}"
-	      }
-	    }
-	  }
-        }
-      }
-
       stage ('Run Build'){
         steps {
 	  container('maven') {
-            dir ("/build") {
-              sh "mvn clean install"
+              sh "mvn -version"
 	    }
 	  }
         }

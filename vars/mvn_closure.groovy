@@ -11,7 +11,7 @@ def call(body) {
     agent {
       kubernetes {
         cloud "${pipelineParams.my_cloud}"
-	label "Test-${pipelineParams.my_cloud}"
+	//label "Test-${pipelineParams.my_cloud}"
 	yaml """\
         apiVersion: v1
         kind: Pod
@@ -21,24 +21,9 @@ def call(body) {
         spec:
           containers:
           - name: maven
-            image: maven:alpine
+            image: changking/maven
             command:
             - cat
-            tty: true
-	    volumeMounts:
-	    - name: vol
-	      mountPath: "/build"
-	  - name: gitter
-	    image: alpine/git
-	    command:
-	    - cat
-	    tty: true
-	    volumeMounts:
-            - name: vol
-              mountPath: "/build"
-	  volumes:
-	  - name: vol
-	    emptyDir: {}
         """.stripIndent()
       }
     }
@@ -46,7 +31,8 @@ def call(body) {
     stages {
       stage ('Check out Repo') {
         steps {
-          container('gitter') {
+          container('maven') {
+	    sh "mkdir /build"
 	    dir ("/build") {
               script {
                 git url: "${pipelineParams.git_url}"
@@ -64,6 +50,16 @@ def call(body) {
 	    }
 	  }
         }
+      }
+    }
+    post {
+      success {
+        container('jnlp') {
+	  script {
+	    currentBuild.keepLog = true
+	    echo "Success Build"
+	  }
+	}
       }
     }
   }
