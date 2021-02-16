@@ -52,5 +52,15 @@ def call(body) {
         }
       }
     }
+    post {
+      success {
+        container('jnlp') {
+	  script {
+	    currentBuild.keepLog = true
+	    echo "Success Build"
+	  }
+	}
+      }
+    }
   }
 }
