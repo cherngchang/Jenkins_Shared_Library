@@ -24,6 +24,7 @@ def call(body) {
             image: changking/maven
             command:
             - cat
+	    tty: true
         """.stripIndent()
       }
     }
