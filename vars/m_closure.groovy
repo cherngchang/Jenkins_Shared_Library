@@ -20,22 +20,20 @@ def call(body) {
             some-label: some-label-value
         spec:
           containers:
-          - name: maven
-            image: maven:alpine
-            command:
-            - cat
-            tty: true
-	    volumeMounts:
-	    - name: vol
-	      mountPath: "/build"
 	  - name: gitter
 	    image: alpine/git
 	    command:
 	    - cat
-	    tty: true
 	    volumeMounts:
             - name: vol
               mountPath: "/build"
+          - name: maven
+            image: maven:alpine
+            command:
+            - cat
+	    volumeMounts:
+	    - name: vol
+	      mountPath: "/build"
 	  volumes:
 	  - name: vol
 	    emptyDir: {}
