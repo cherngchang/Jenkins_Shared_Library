@@ -32,8 +32,7 @@ def call(body) {
       stage ('Run Build'){
         steps {
 	  container('maven') {
-              sh "mvn -version"
-	    }
+            sh "mvn -version"
 	  }
         }
       }
