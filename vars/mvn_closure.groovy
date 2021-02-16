@@ -25,6 +25,20 @@ def call(body) {
             command:
             - cat
             tty: true
+	    volumeMounts:
+	    - name: vol
+	      mountPath: /build
+	  - name: git
+	    image: alpine/git
+	    command:
+	    -cat
+	    tty: true
+	    volumeMounts:
+            - name: vol
+              mountPath: /build
+	  volumes:
+	  - name: vol
+	    emptyDir: {}
         """.stripIndent()
       }
     }
@@ -32,9 +46,8 @@ def call(body) {
     stages {
       stage ('Check out Repo') {
         steps {
-          container('maven') {
-            sh "mkdir mvn-build"
-	    dir ("mvn-build") {
+          container('git') {
+	    dir ("/build") {
               script {
                 git url: "${pipelineParams.git_url}"
 	      }
@@ -46,7 +59,7 @@ def call(body) {
       stage ('Run Build'){
         steps {
 	  container('maven') {
-            dir ("mvn-build") {
+            dir ("/build") {
               sh "mvn clean install"
 	    }
 	  }
