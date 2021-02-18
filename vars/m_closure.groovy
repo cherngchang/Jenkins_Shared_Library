@@ -10,7 +10,7 @@ def call(body) {
   pipeline {
     agent {
       kubernetes {
-        //cloud "${pipelineParams.my_cloud}"
+        cloud "${pipelineParams.my_cloud}"
 	//label "TestSharedLib"
 	idleMinutes 5
 	yaml """\
@@ -20,8 +20,7 @@ def call(body) {
           containers:
           - name: maven
             image: maven:3.5.4-jdk-8-slim
-            command:
-            - cat
+            command: ["tail", "-f", "/dev/null"]
 	  - name: docker
 	    image: docker:18.06.1
 	    command: ["tail", "-f", "/dev/null"]
