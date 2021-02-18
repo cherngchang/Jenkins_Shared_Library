@@ -25,8 +25,8 @@ def call(body) {
 	    image: docker:18.06.1
 	    command: ["tail", "-f", "/dev/null"]
 	    volumeMounts:
-	      - name: docker
-	        mountPath: /var/run/docker.sock # We use the k8s host docker engine
+	    - name: docker
+	      mountPath: /var/run/docker.sock # We use the k8s host docker engine
 	  volumes:
 	  - name: docker
             hostPath:
