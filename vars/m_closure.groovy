@@ -19,7 +19,7 @@ def call(body) {
         spec:
           containers:
           - name: maven
-            image: changking/maven
+            image: maven:3.5.4-jdk-8-slim
             command:
             - cat
 	  - name: docker
