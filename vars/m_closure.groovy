@@ -10,7 +10,7 @@ def call(body) {
   pipeline {
     agent {
       kubernetes {
-        cloud "${pipelineParams.my_cloud}"
+        //cloud "${pipelineParams.my_cloud}"
 	//label "TestSharedLib"
 	idleMinutes 5
 	yaml """\
