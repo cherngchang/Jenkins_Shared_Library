@@ -49,16 +49,14 @@ def call(body) {
 	  }
 	}
       }
-      post {
-        success {
-          container('jnlp') {
-	    script {
-	      currentBuild.keepLog = true
-	      echo "Success Build"
-	    }
+      postBuildSteps('SUCCESS') {
+        container('jnlp') {
+          script {
+            currentBuild.keepLog = true
+	    echo "Success Build"
 	  }
-        }
-     }
+	}
+      }
     }
   }
 }
