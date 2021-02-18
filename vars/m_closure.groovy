@@ -49,7 +49,7 @@ def call(body) {
 	  }
 	}
       }
-   /* post {
+      post {
       success {
         container('jnlp') {
 	  script {
@@ -57,7 +57,7 @@ def call(body) {
 	    echo "Success Build"
 	  }
 	}
-      }*/
+      }
     }
   }
 }
