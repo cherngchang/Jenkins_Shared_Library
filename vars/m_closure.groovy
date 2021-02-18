@@ -49,7 +49,10 @@ def call(body) {
 	  }
 	}
       }
-      postBuildSteps('SUCCESS') {
+    }
+
+    post { 
+      success {
         container('jnlp') {
           script {
             currentBuild.keepLog = true
