@@ -11,7 +11,7 @@ def call(body) {
     agent {
       kubernetes {
         cloud "${pipelineParams.my_cloud}"
-	label "TestSharedLib"
+	//label "TestSharedLib"
 	idleMinutes 5
 	yaml """\
         apiVersion: v1
