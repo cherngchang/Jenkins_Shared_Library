@@ -13,25 +13,7 @@ def call(body) {
         cloud "${pipelineParams.my_cloud}"
 	//label "TestSharedLib"
 	idleMinutes 5
-	yaml """\
-        apiVersion: v1
-        kind: Pod
-        spec:
-          containers:
-          - name: maven
-            image: maven:3.5.4-jdk-8-slim
-            command: ["tail", "-f", "/dev/null"]
-	  - name: docker
-	    image: docker:18.06.1
-	    command: ["tail", "-f", "/dev/null"]
-	    volumeMounts:
-	    - name: docker
-	      mountPath: /var/run/docker.sock # We use the k8s host docker engine
-	  volumes:
-	  - name: docker
-            hostPath:
-	      path: /var/run/docker.sock
-        """.stripIndent()
+	yaml libraryResource('podtemplates/build-pod.yaml')
 	defaultContainer 'maven'
       }
     }
